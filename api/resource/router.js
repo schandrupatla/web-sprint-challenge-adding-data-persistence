@@ -11,6 +11,13 @@ router.get('/', (req,res,next)=>{
         })
         .catch(next);
 })
+router.post('/', (req, res, next) => { 
+    db.createResource(req.body)
+      .then(resource => {
+        res.status(201).json(resource);
+      })
+      .catch(next);
+  });
 
 router.use((err, req, res, next) => { // eslint-disable-line
     res.status(err.status || 500).json({
