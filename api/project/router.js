@@ -24,6 +24,12 @@ router.get('/', (req,res,next)=>{
 router.post('/', checkProjectPayload, async (req, res, next) => { 
   try{
     const newProject = await db.createProject(req.body)
+      if(newProject.project_completed !==0){
+        newProject.project_completed ="true";
+      }
+      else{
+        newProject.project_completed="false";
+      }
         res.status(201).json(newProject);
     }
     catch(err){
