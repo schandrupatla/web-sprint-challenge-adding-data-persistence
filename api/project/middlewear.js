@@ -1,5 +1,4 @@
-const dbConfig = require("../../data/dbConfig");
-const db = require("./model");
+
 
 exports.checkProjectPayload = (req, res, next) => {
     const error = { status: 400 };
