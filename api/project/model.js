@@ -3,13 +3,12 @@ const dbAccess = require('../../data/dbConfig');
 
 function getProjects() {
     return dbAccess('projects')
-    .select( 'project_name','project_description', 'project_completed')
-    
+     .select( 'project_name','project_description', 'project_completed')   
   }
 
-   function createProject(project){
-    const [project_id] =  dbAccess('projects').insert(project);
-    return getProjects().where({ project_id }).first();
+ async function createProject(project){
+    const [project_id] = await  dbAccess('projects').insert(project);
+  return getProjects().where({ project_id }).first();
   }
 
   module.exports = {

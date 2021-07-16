@@ -21,14 +21,15 @@ router.get('/', (req,res,next)=>{
         })
         .catch(next);
 })
+
 router.post('/', checkProjectPayload, async (req, res, next) => { 
   try{
     const newProject = await db.createProject(req.body)
-      if(newProject.project_completed !==0){
-        newProject.project_completed = true;
+      if(newProject.project_completed === 0){
+        newProject.project_completed = false;
       }
       else{
-        newProject.project_completed =false;
+        newProject.project_completed = true;
       }
         res.status(201).json(newProject);
     }
@@ -36,6 +37,7 @@ router.post('/', checkProjectPayload, async (req, res, next) => {
       next(err);
     }
   });
+
 
 router.use((err, req, res, next) => { // eslint-disable-line
     res.status(err.status || 500).json({

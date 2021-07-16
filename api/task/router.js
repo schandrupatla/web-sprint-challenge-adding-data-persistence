@@ -18,6 +18,7 @@ router.get("/", (req, res, next) => {
     })
     .catch(next);
 });
+
 router.post("/", checkTaskPayload, async (req, res, next) => {
   try {
     const newTask = await db.createTask(req.body);

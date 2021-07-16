@@ -10,10 +10,9 @@ exports.checkTaskPayload = (req, res, next) => {
       error.message = "Description of the task must be a string";
     } else if (task_description.trim().length < 3 || task_description.trim().length > 250) {
       error.message = "description of the project must be between 3 and 250 characters";
-    } else if (typeof task_completed !== "number" ||isNaN(task_completed) || task_completed < 0 || task_completed > 1)  {
-      error.message = "task_completed of tasks must be a number with a value of 0(false) or 1(true)";
-    }
-    else if (typeof  project_id !== "number" ||isNaN( project_id) ||  project_id === undefined )  {
+    } else if (typeof task_completed !== "boolean"  || task_completed === 1 || task_completed === 0)  {
+      error.message = "task_completed of task must be a boolean with a value of true or false";
+    }else if (typeof  project_id !== "number" ||isNaN( project_id) ||  project_id === undefined )  {
         error.message = " project_id is required thats exists as primary key in projects table";
       }
   
