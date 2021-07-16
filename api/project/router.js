@@ -10,11 +10,11 @@ router.get('/', (req,res,next)=>{
     db.getProjects()
         .then(projects=>{
             projects.forEach(project=>{
-              if(project.project_completed !== 0){
-                 project.project_completed = "true"
+              if(project.project_completed === 0){
+                 project.project_completed = false
               }
               else{
-                project.project_completed = "false"
+                project.project_completed = true
               }
             })
             res.status(200).json(projects);
@@ -25,10 +25,10 @@ router.post('/', checkProjectPayload, async (req, res, next) => {
   try{
     const newProject = await db.createProject(req.body)
       if(newProject.project_completed !==0){
-        newProject.project_completed ="true";
+        newProject.project_completed = true;
       }
       else{
-        newProject.project_completed="false";
+        newProject.project_completed =false;
       }
         res.status(201).json(newProject);
     }
